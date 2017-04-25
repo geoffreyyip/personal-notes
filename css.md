@@ -1,3 +1,17 @@
+## Box Model
+
+### Default Values
+
+Block elements have a default `width` of `100%`. They will expand to fill the space of their container. Inline-block elements contract and expand to fit their content. Inline elements can't have a fixed width. Block elements will have their height default to the size of their content.
+
+A quirk of inline elements is that they take horizontal margin but not vertical margin.
+
+Box-sizing defaults to content-box, an additive model. You have your content width + height and then you add paddings, borders, and margins on top of that. Much more convenient is to use border-box. It makes the math easier. Modern browsers support it, and you should only use box-sizing on older browsers.
+
+### Margin and Padding Colors
+
+Margins and padding colors are transparent by default. Margin will take on the background color of their containers. Padding will take on the background color of their elements.
+
 ## Viewport
 
 Best practice is to set `<meta name="viewport" content="width=device-width, initial-scale=1" />` Viewport is not an official web standard, so there is no official specification for it. But it is effectively supported in all modern-day browsers.
@@ -38,7 +52,7 @@ Partials are denoted with a leading underscore (E.g. `_box.scss`). They do not g
 
 Functions and mixins are very similar. They both accept the same arguments. But they return different values. Mixins return CSS styles and variables. Functions return a single data value. (E.g. they return SCSS lists or maps or strings.)
 
-## CSS + SASS Specificity1
+## CSS + SASS Specificity
 
 For a given element, properties with `!important` flags have the highest specificity. After that are inline styles. After that come external stylesheets.
 
