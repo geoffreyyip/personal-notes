@@ -22,6 +22,28 @@ Ex.
 }
 ```
 
+## Text-Shadow vs. Box-Shadow
+
+`text-shadow` puts a shadow on the text. `box-shadow` puts a shadow on the entire text.
+
+## Text-Align vs. Float
+
+`float` moves the entire element. `text-align` moves just the text inside.
+
+## Floats / Clear
+
+Floats are tricky. Float property defaults to none. Setting `float` to either `left` or `right` will take that element outside the normal flow. This causes the width of the element to default to the width of the content inside, kind of like an inline element. This is fine for pictures set within a paragraph of text. But it's not fine for columns of text, or aside navigation bars. 
+
+You can solve this by setting a fixed `width` on each element. Add a margin to prevent floated elements from touching each other.
+
+Note that `float` elements are not `inline` elements. Even though elements default to the width of their content like `inline` elements, they do not change their display to `inline`. In fact, `float` elements are meant for `block` elements. It's a best practice to set `float` only on `block` elements.
+
+Something to help put all these quirks in context: `float` was designed to let text wrap around images. Images are typically displayed as `block` elements since they may span over multiple lines of text. But they also have a fixed width or resolution. So the default behavior of `float` is to default the width of the element to match the width of the image content. For this specific purposes, `float` works pretty well. But once you start using `float` outside that context, say for making two-column layouts, `float` starts to get weird.
+
+If you use `float` to make two column layouts, then content that occurs after the two columns (say a footer) may blend in with the floats. You need a way to separate the footer from the two floated columns. There are two ways of doing this. The first way is to set a `clear` property on any element that comes after the `float`. This tells elements that are listed after the floats NOT to wrap around the floated content, and instead resume the normal flow. The second way is to use a **clearfix** and wrap the `float` elements within a parent container, add pseudo-classes `:before` and `:after` for CSS to inject content, and then set `clear: both` on that injected content. Typically the injected content is a blank string that takes up no display space. That way you can encapsulate all the weird quirks of `float` within a HTML container. Usually, the container has a `class="clearfix"` attribute.
+
+The `clearfix` method is favored. It's more upfront code. But it's also a reusuable bundle of class properties. And code reuse is always awesome.
+
 ## Box Model
 
 ### Default Values
@@ -39,20 +61,6 @@ Box-sizing defaults to content-box, an additive model. You have your content wid
 ### Margin and Padding Colors
 
 Margins and padding colors are transparent by default. Margin will take on the background color of their containers. Padding will take on the background color of their elements.
-
-### Floats / Clear
-
-Floats are tricky. Float property defaults to none. Setting `float` to either `left` or `right` will take that element outside the normal flow. This causes the width of the element to default to the width of the content inside, kind of like an inline element. This is fine for pictures set within a paragraph of text. But it's not fine for columns of text, or aside navigation bars. 
-
-You can solve this by setting a fixed `width` on each element. Add a margin to prevent floated elements from touching each other.
-
-Note that `float` elements are not `inline` elements. Even though elements default to the width of their content like `inline` elements, they do not change their display to `inline`. In fact, `float` elements are meant for `block` elements. It's a best practice to set `float` only on `block` elements.
-
-Something to help put all these quirks in context: `float` was designed to let text wrap around images. Images are typically displayed as `block` elements since they may span over multiple lines of text. But they also have a fixed width or resolution. So the default behavior of `float` is to default the width of the element to match the width of the image content. For this specific purposes, `float` works pretty well. But once you start using `float` outside that context, say for making two-column layouts, `float` starts to get weird.
-
-If you use `float` to make two column layouts, then content that occurs after the two columns (say a footer) may blend in with the floats. You need a way to separate the footer from the two floated columns. There are two ways of doing this. The first way is to set a `clear` property on any element that comes after the `float`. This tells elements that are listed after the floats NOT to wrap around the floated content, and instead resume the normal flow. The second way is to use a **clearfix** and wrap the `float` elements within a parent container, add pseudo-classes `:before` and `:after` for CSS to inject content, and then set `clear: both` on that injected content. Typically the injected content is a blank string that takes up no display space. That way you can encapsulate all the weird quirks of `float` within a HTML container. Usually, the container has a `class="clearfix"` attribute.
-
-The `clearfix` method is favored. It's more upfront code. But it's also a reusuable bundle of class properties. And code reuse is always awesome.
 
 ## Viewport
 
