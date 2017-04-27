@@ -1,16 +1,58 @@
+## Font
+
+`font` properties have the following signature: `font-style`, `font-variant`, `font-weight`, `font-size`, `line-height`, and `font-family`. `font-size` and `line-height` have to be separated by a `/`. (E.g. `14px/22px`). That's also why the second value is usually bigger.
+
+No commas separate the properties, except for `font-family` which is a variadic property that uses commas.
+
+## Color
+
+`color` property always refers to the text color. Note that there is no `font-color` property. Fonts are files, kinda like mp3s are files. You can apply a color on top of a font file the same way you can apply a volume or playback speed to a mp3 file. But you can't pick a font-color. Font files just have the typeface information.
+
+## Line-Height
+
+General rule of thumb: line height should be set to 150% of the font height. Generally setting the `line-height` property to `150%` is enough. But font files can be weird. So always experiment and measure.
+
+Nice CSS Trick: To center text within buttons, alert messages and single-text blocks, set `line-height` and `height` to be the same value.
+
+Ex.
+```
+.btn {
+  line-height: 22px;
+  height: 22px;
+}
+```
+
 ## Box Model
 
 ### Default Values
 
-Block elements have a default `width` of `100%`. They will expand to fill the space of their container. Inline-block elements contract and expand to fit their content. Inline elements can't have a fixed width. Block elements will have their height default to the size of their content.
+Block elements have a default `width` of `100%`. They will expand to fill the space of their container. Inline-block elements contract and expand to fit their content. Inline elements can't have a fixed width, and will always have a width equal to the content size. Block elements will have their height default to the size of their content.
 
 A quirk of inline elements is that they take horizontal margin but not vertical margin.
 
 Box-sizing defaults to content-box, an additive model. You have your content width + height and then you add paddings, borders, and margins on top of that. Much more convenient is to use border-box. It makes the math easier. Modern browsers support it, and you should only use box-sizing on older browsers.
 
+### Box, Inline, Inline-Box
+
+`Inline` elements can't have fixed widths or heights. Unless you use `inline-box`. Then the elements can be set on the same line as other elements and have width/ height set.
+
 ### Margin and Padding Colors
 
 Margins and padding colors are transparent by default. Margin will take on the background color of their containers. Padding will take on the background color of their elements.
+
+### Floats / Clear
+
+Floats are tricky. Float property defaults to none. Setting `float` to either `left` or `right` will take that element outside the normal flow. This causes the width of the element to default to the width of the content inside, kind of like an inline element. This is fine for pictures set within a paragraph of text. But it's not fine for columns of text, or aside navigation bars. 
+
+You can solve this by setting a fixed `width` on each element. Add a margin to prevent floated elements from touching each other.
+
+Note that `float` elements are not `inline` elements. Even though elements default to the width of their content like `inline` elements, they do not change their display to `inline`. In fact, `float` elements are meant for `block` elements. It's a best practice to set `float` only on `block` elements.
+
+Something to help put all these quirks in context: `float` was designed to let text wrap around images. Images are typically displayed as `block` elements since they may span over multiple lines of text. But they also have a fixed width or resolution. So the default behavior of `float` is to default the width of the element to match the width of the image content. For this specific purposes, `float` works pretty well. But once you start using `float` outside that context, say for making two-column layouts, `float` starts to get weird.
+
+If you use `float` to make two column layouts, then content that occurs after the two columns (say a footer) may blend in with the floats. You need a way to separate the footer from the two floated columns. There are two ways of doing this. The first way is to set a `clear` property on any element that comes after the `float`. This tells elements that are listed after the floats NOT to wrap around the floated content, and instead resume the normal flow. The second way is to use a **clearfix** and wrap the `float` elements within a parent container, add pseudo-classes `:before` and `:after` for CSS to inject content, and then set `clear: both` on that injected content. Typically the injected content is a blank string that takes up no display space. That way you can encapsulate all the weird quirks of `float` within a HTML container. Usually, the container has a `class="clearfix"` attribute.
+
+The `clearfix` method is favored. It's more upfront code. But it's also a reusuable bundle of class properties. And code reuse is always awesome.
 
 ## Viewport
 
