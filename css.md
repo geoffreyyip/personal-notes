@@ -58,6 +58,8 @@ div {
 }
 ```
 
+The first value gets overriden by the second one in a modern browser. An older browser won't understand the second line, and will keep the solid color defined in the first line.
+
 ## Font
 
 `font` properties have the following signature: `font-style`, `font-variant`, `font-weight`, `font-size`, `line-height`, and `font-family`. `font-size` and `line-height` have to be separated by a `/`. (E.g. `14px/22px`). That's also why the second value is usually bigger.
