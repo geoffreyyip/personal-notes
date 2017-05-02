@@ -1,3 +1,29 @@
+## About Lists
+
+`<ul>` and `<ol>` differences are mainly due to semantics. `<ul>` will default to bullet points. `<ol>` will default to numbers. `<ol>` has some additional functionality, like `reversed` and `start`, which lets you start a list at a given number. But in general, the tags are relatively simple.
+
+One rule that must be followed. Children of `<ul>` and `<ol>` must be `<li>`. Once you have the `<li>`, you can put anything inside it. Note the marker (bullet point, numbered, hollow dot) will change depending on nesting level.
+
+To change the bullet-point or numbers to something different, set a `list-style-type` value.
+
+To add your own custom list marker, set `list-style-type: none`, specify a background image per `<li>` tag, and add a left margin.
+
+By default, the list marker is given its own vertical section, aka no text may be present below the list marker. This is known as a `list-style-position: outside` and it's the default value. If you want text to be present below the list marker, when text wraps to a second one, then set `list-style-position: inside`.
+
+For readability, put `list-style-position` and `list-style-type` in the same property. 
+
+```CSS
+list-style: circle inside;
+```
+
+### On Horizontal Lists and Their Quirks
+
+Sometimes you may want a horizontal list. For example, if you have a fixed navigation bar with multiple buttons, you may wrap those buttons inside of `<li>` tags. You have three options to make a list horizontal: change `display` to `inline` or `inline-block` and using `float`.
+
+If changing `display`, `inline-block` is preferred over `inline` as it gives greater control. You can modify margins and set fixed dimensions for `inline-block`. You can't with `inline`. Note that changing display sets `list-style-type: none`. 
+
+`float: left` works, too. But the `list-style-type` will persist, while the `margin-left` disappears. Remember, float wasn't designed for layout purposes. So you'll need to manually assign a margin and manually remove the `list-style-type`.
+
 ## Grid Systems
 
 Space between columns is called a _gutter_. 
