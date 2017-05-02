@@ -1,6 +1,6 @@
 ## About Lists
 
-`<ul>` and `<ol>` differences are mainly due to semantics. `<ul>` will default to bullet points. `<ol>` will default to numbers. `<ol>` has some additional functionality, like `reversed` and `start`, which lets you start a list at a given number. But in general, the tags are relatively simple.
+`<ul>` and `<ol>` differences are mainly due to semantics. `<ul>` will default to bullet points. `<ol>` will default to numbers. `<ol>` has some additional functionality, like `reversed` and `start`, which lets you start a list at a given number. But in general, the tags behave the same.
 
 One rule that must be followed. Children of `<ul>` and `<ol>` must be `<li>`. Once you have the `<li>`, you can put anything inside it. Note the marker (bullet point, numbered, hollow dot) will change depending on nesting level.
 
@@ -15,6 +15,8 @@ For readability, put `list-style-position` and `list-style-type` in the same pro
 ```CSS
 list-style: circle inside;
 ```
+
+Final note: most CSS Reset and Normalize scripts will remove this information.
 
 ### On Horizontal Lists and Their Quirks
 
