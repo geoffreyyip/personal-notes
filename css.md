@@ -1,3 +1,28 @@
+## Background vs Background-Color
+
+Both can set a background color. Only `background` can set an image.
+
+## Background Images
+
+Use `background` to set. 
+
+By default, `background-repeat` will be set to `repeat` causing the image to tile multiple times from top-left. You can set it to `repeat-x`, `repeat-y` or `no-repeat`. `no-repeat` is the most common value.
+
+### Background-Position
+
+By default, `background-position` will be set to `0% 0%` which means flush with the top-left corner of its container. To offset, specify two values: a horizontal offset, then a vertical offset. Think of this as the `(X, Y)` convention. (Note this differs from the `margin` and `padding` two-parameter convention. There the two parameters means vertical space, then horizontal space.) If the second value is ommited, then vertical offset will default to `50%` and the image will be vertically centered.
+
+If the two values are pixels, then image will be offset with respect to the left edge, then the top edge. If the two values are percentages, then things get really weird. For 50%, the halfway point of the image will match up with the halfway point of the container. For 75%, the 75% horizontal point will match up with the 75% point of the container.
+
+You can also use keywords like `left top` or `right top` or `left bottom` or `left top`. These will flush the image with the respective corner.
+
+Finally, you can specify four values, aka `keyword, value, keyword, value`. For example, `left 50px bottom 20px`. That way, instead of offsetting from the left-top edges, you can offset from the left-bottom edges. 
+
+Three values is possible but not recommended.
+
+The keyword `center` is available for two-parameter settings. But it cannot be used for both horizontal and vertical centering. It can only be used for one. You don't need to specify it for absolute centering though. You can specify `center` `center center` or `50% 50%` to horizontally and vertically center. It's just that in `center center`, the second `center` gets ignored.
+
+
 ## Font
 
 `font` properties have the following signature: `font-style`, `font-variant`, `font-weight`, `font-size`, `line-height`, and `font-family`. `font-size` and `line-height` have to be separated by a `/`. (E.g. `14px/22px`). That's also why the second value is usually bigger.
