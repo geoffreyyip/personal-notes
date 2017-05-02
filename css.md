@@ -1,3 +1,19 @@
+## About Images
+
+`.png`, `.jpg` and `.gif` are the most common image formats. `.gif` is used for animations. `.png` is used for images with low color counts and transparencies, typically icons. `.jpg` is used for high-color count photographs.
+
+The best image format is more of an art than a science. If unsure, try it out. That's the only way to really tell.
+
+`<img>` can be styled using HTML or CSS. CSS takes priority, and CSS can be applied to multiple different elements at once. So CSS properties are preferred. (Ex. if you need the same image container size for three different sections) Like the `background-size` property, `<img>` will attempt to maintain aspect ratio. Setting a height and no width will cause the width to scale accordingly. Setting a width and no height will cause the height to scale accordingly.
+
+It's highly recommend that you set a `display` value. By default, `<img>` will display as `inline`. If the `<img>` is adjacent to a line of text, it will cause the line to resize to fit the height of the image.
+
+`display: block` will give the image its own line. `display: float` will cause text (and other inline content) to wrap around the element. It's recommend that you add a `margin`, as the element defaults to `margin: 0`.
+
+`<img>` will have its dimensions default to the size of the content.
+
+It is highly recommend to set an `alt="alternate text"` property. It helps with screen readers and ensures graceful degradation.
+
 ## About Lists
 
 `<ul>` and `<ol>` differences are mainly due to semantics. `<ul>` will default to bullet points. `<ol>` will default to numbers. `<ol>` has some additional functionality, like `reversed` and `start`, which lets you start a list at a given number. But in general, the tags behave the same.
