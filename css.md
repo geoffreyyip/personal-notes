@@ -1,6 +1,31 @@
-## Background vs Background-Color
+## Grid Systems
 
-Both can set a background color. Only `background` can set an image.
+Space between columns is called a _gutter_. 
+
+Most pages have a `960px` container width. To make your grid system snap to that, you want to _gutter_ between columms to match the _gutter_ between the container edge and the first column. 
+
+One way of doing this is setting a `30px` margin on the container, a `15px` margin on the grid, and a `15px` margin for each column. That way, the `margin-right` of one column plus the `margin-left` of the following column adds up to a `30px` _gutter_. And the `15px` margin on the grid, plus the `15px` `margin-left` of the first column also adds up to a `30px` _gutter_. This ensures a evenness between columns.
+
+## How to Design a Solid Button Component
+
+(Need to work on this)
+Button should have a `border` property that matches its `background` color on `:hover`.
+
+```CSS
+.btn {
+  border: 1px solid #fff;
+}
+
+.btn:hover {
+  background: #fff
+}
+```
+
+Button should have a `cursor` value of `pointer`.
+
+## Background, Background-Color, Background-Image
+
+`background` can set either a `background-image` or a `background-color`. Most stylesheets use `background` as a catch-all.
 
 ## Background Images
 
@@ -20,8 +45,18 @@ Finally, you can specify four values, aka `keyword, value, keyword, value`. For 
 
 Three values is possible but not recommended.
 
-The keyword `center` is available for two-parameter settings. But it cannot be used for both horizontal and vertical centering. It can only be used for one. You don't need to specify it for absolute centering though. You can specify `center` `center center` or `50% 50%` to horizontally and vertically center. It's just that in `center center`, the second `center` gets ignored.
+The keyword `center` is strange. If you specify `background-position: center`, then it will horizontally and vertically center. If you specify `left center` or `top center` or `bottom center` or `right center`, then it will flush to that edge, and center with respect to that edge.
 
+### Background-Gradients
+
+`linear-gradient()` counts as a background image. Make sure to define a solid color fallback value, in case the gradient function fails.
+
+```CSS
+div {
+  background: #466368;
+  background: linear-gradient(#648880, #293f50);
+}
+```
 
 ## Font
 
