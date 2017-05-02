@@ -27,11 +27,25 @@ Button should have a `cursor` value of `pointer`.
 
 `background` can set either a `background-image` or a `background-color`. Most stylesheets use `background` as a catch-all.
 
-## Background Images
+### Background Images
 
 Use `background` to set. 
 
 By default, `background-repeat` will be set to `repeat` causing the image to tile multiple times from top-left. You can set it to `repeat-x`, `repeat-y` or `no-repeat`. `no-repeat` is the most common value.
+
+### Multiple Background Images
+
+CSS3 allows multiple background images. To do so, list multiple comma-delimited `background` properties on the same line.
+
+```CSS
+div {
+  background:  url("foreground.png") 0 0 no-repeat, url("middle-ground.png") 0 0 no-repeat, url("background.png") 0 0 no-repeat;
+}
+```
+
+Note that within each comma-separated value, you have `background-image background-position background-repeat`.
+
+Images will go from foremost to backmost. The first background property will get layered on top of successive background properties.
 
 ### Background-Position
 
@@ -59,6 +73,18 @@ div {
 ```
 
 The first value gets overriden by the second one in a modern browser. An older browser won't understand the second line, and will keep the solid color defined in the first line.
+
+### Background-Size
+
+Note: Images will attempt to preserve their original aspect ratio. In other words, if you set a horizontal size, the vertical size will change to maintain the aspect ratio.
+
+There are two main schemes you can use to specify background-size. The simplest is to supply two values. Like `background-position`, `background-size` follows the `(X, Y)` convention. Values can be pixels or percentages, and will be set with respect to the **container element, not the image itself**. For example, setting `background-size: 100% 100%` will stretch the image to fit its container. This can destroy the original aspect ratio. If you want to preserve the original aspect ratio, then you can do `background-size: 100% auto` or `background-size: auto 100%`. The former sets the image's horizontal size to match the container's horizontal size, and then automatically scales the vertical dimension. The latter sets the image's vertical size to match the container's vertical size and then automatically scales the horizontal dimension.
+
+The second scheme is to supply a `cover` or `contain` keyword. Both will preserve the original aspect ratio. `cover` will transform the image until the content cover the entire container. `contain` will transform the image until the entire image is within the container.
+
+## Background-Clip + Background-Origin
+
+`background-clip` defaults to `border-box`. `background-origin` is set to `padding-box`. `background-clip` tells the browser when to truncate or cut off the image. `background-origin` says where to start the background. By default this will mean the top-left corner of the padding. But you can change it to the top-left corner of the content with `content-box` or the top-left corner of the `border` with `border-box`. You can combine that with `background-position: bottom right` to originate the background from a different corner.
 
 ## Font
 
