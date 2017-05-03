@@ -1,3 +1,9 @@
+## Semantic Tags
+
+Semantics is the idea that you should use HTML tags for their intended purpose, rather than for their layout or presentation functionality. It helps ensure interoperability, integrations, a high search engine rating, and accessibility.
+
+`<main>` is a high-level component that has content unique to a page. `<nav>` is an element to contain blocks of site navigation links. `<article>` signifies content suitable for standalone publication and syndication.
+
 ## About Images
 
 `.png`, `.jpg` and `.gif` are the most common image formats. `.gif` is used for animations. `.png` is used for images with low color counts and transparencies, typically icons. `.jpg` is used for high-color count photographs.
