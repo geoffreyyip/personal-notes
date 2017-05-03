@@ -1,3 +1,35 @@
+## Form
+
+`<form>` elements are containers. They have an `action` or URL to send info to, and a `method` to designate the HTTP method. 
+
+### Input
+
+`<input>` defaults to `type="text"`. Best practice says you should specify a `name` attribute, to designate inputs when they're sent to the server. That way, you can send information as `name, value` pairs. All `<input>` tags are self-contained.
+
+`<textarea` is useful for inputs spanning multiple lines. It does not have a type attribute, as it only accepts text data. You can use CSS to specify `width` and `height`.
+
+### Radio, Checkbox, and Dropdowns
+
+`type="radio"` and `type="<checkbox>"` are similar in implementation. You don't need to wrap your options in anything. But you do need each `<input>` tag to have to same `name` attribute for them to be linked. `value`s should be set as attributes. You may optionally include text next to a `type="radio"` or `type="checkbox"` tag, but that information will not get sent to the servers. An example follows below:
+
+```HTML
+<input type="radio" name="day" value="Friday" checked> Friday
+<input type="radio" name="day" value="Saturday"> Saturday
+<input type="radio" name="day" value="Sunday"> Sunday
+```
+
+Dropdown options are different. First, there is no dropdown tag. Second, you do need to wrap your options inside a parent `<select>` tag and put choices as `<option>` tags. `name` is specified in the parent tag. `value` will be specified in the child tags. An example follows below:
+
+```HTML
+<select name="day">
+  <option value="Friday" selected> Friday
+  <option value="Saturday"> Saturday
+  <option value="Sunday"> Sunday
+</select>
+```
+
+Note that all these tags must be contained in a bigger form element. Otherwise, none of the info gets sent to the server.
+
 ## Semantic Tags
 
 Semantics is the idea that you should use HTML tags for their intended purpose, rather than for their layout or presentation functionality. It helps ensure interoperability, integrations, a high search engine rating, and accessibility.
