@@ -30,6 +30,26 @@ Dropdown options are different. First, there is no dropdown tag. Second, you do 
 
 Note that all these tags must be contained in a bigger form element. Otherwise, none of the info gets sent to the server.
 
+### Submit
+
+Use a `<button>` tag for customization. You can specify text between opening and closing tags. You can style it with CSS. You don't need to specify `type="submit"` since that's the default value. 
+
+### Fieldsets
+
+`<fieldset>` is like `<section>`. It's a semantic element meant for grouping related input elements inside a bigger `<form>` element.
+
+You can include `<legend>...</legend>` inside this element. It will add the text to the top-left corner of the element.
+
+You can set `disabled` or `required` on a fieldset to apply that to all its child inputs.
+
+### Placeholder vs Value
+
+`placeholder` is best used for suggestions in input boxes. `value` is best for pre-populating text fields.
+
+### Form Styling
+
+By default, all `<input>` will come with borders. You can replace these borders to match your color scheme if wanted.
+
 ## Semantic Tags
 
 Semantics is the idea that you should use HTML tags for their intended purpose, rather than for their layout or presentation functionality. It helps ensure interoperability, integrations, a high search engine rating, and accessibility.
@@ -104,6 +124,8 @@ Button should have a `border` property that matches its `background` color on `:
 ```
 
 Button should have a `cursor` value of `pointer`.
+
+Make sure you set `<button type="something">`. By default, it's set to `type="submit"` and will trigger a page reload.
 
 ## Background, Background-Color, Background-Image
 
