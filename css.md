@@ -186,9 +186,11 @@ There are two main schemes you can use to specify background-size. The simplest 
 
 The second scheme is to supply a `cover` or `contain` keyword. Both will preserve the original aspect ratio. `cover` will transform the image until the content cover the entire container. `contain` will transform the image until the entire image is within the container.
 
-## Background-Clip + Background-Origin
+### Background-Clip + Background-Origin
 
 `background-clip` defaults to `border-box`. `background-origin` is set to `padding-box`. `background-clip` tells the browser when to truncate or cut off the image. `background-origin` says where to start the background. By default this will mean the top-left corner of the padding. But you can change it to the top-left corner of the content with `content-box` or the top-left corner of the `border` with `border-box`. You can combine that with `background-position: bottom right` to originate the background from a different corner.
+
+Note, `background-color` will cover `padding` but will not cover `margin`.
 
 ## Font
 
