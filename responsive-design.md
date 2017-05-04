@@ -7,7 +7,7 @@ Pixels and viewports are weird and confusing. Don't worry about them. Just do th
 
 ### How to Get Automatically Stacking Columns at Smaller Sizes
 
-Option#1: Use a grid system, like Bootstrap Something like the code below will stack on desktops, but collapse on smaller screens.
+Option#1: Use a grid system, like Bootstrap. Something like this class below will stack on mobile devices, but turn into multi-columns the device is above a certain breakpoint.
 
 ```HTML
 <section class="col-md-6"></section> 
@@ -17,6 +17,7 @@ Option#1: Use a grid system, like Bootstrap Something like the code below will s
 Option#2: Define your own media queries. Use the same classes as above but define your own.
 
 ```CSS
+/* Clearfix hack not included */
 .col-md-6 {
   float: left;
   width: 50%;
