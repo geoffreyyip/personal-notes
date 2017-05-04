@@ -108,25 +108,6 @@ Most pages have a `960px` container width. To make your grid system snap to that
 
 One way of doing this is setting a `30px` margin on the container, a `15px` margin on the grid, and a `15px` margin for each column. That way, the `margin-right` of one column plus the `margin-left` of the following column adds up to a `30px` _gutter_. And the `15px` margin on the grid, plus the `15px` `margin-left` of the first column also adds up to a `30px` _gutter_. This ensures a evenness between columns.
 
-## How to Design a Solid Button Component
-
-(Need to work on this)
-Button should have a `border` property that matches its `background` color on `:hover`.
-
-```CSS
-.btn {
-  border: 1px solid #fff;
-}
-
-.btn:hover {
-  background: #fff
-}
-```
-
-Button should have a `cursor` value of `pointer`.
-
-Make sure you set `<button type="something">`. By default, it's set to `type="submit"` and will trigger a page reload.
-
 ## Background, Background-Color, Background-Image
 
 `background` can set either a `background-image` or a `background-color`. Most stylesheets use `background` as a catch-all.
