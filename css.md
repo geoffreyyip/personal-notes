@@ -187,6 +187,8 @@ No commas separate the properties, except for `font-family` which is a variadic 
 
 General rule of thumb: line height should be set to 150% of the font height. Generally setting the `line-height` property to `150%` is enough. But font files can be weird. So always experiment and measure.
 
+For the shorthand `font` property, you can do `font: bold 24px/1.5 'Helvetica', sans-serif`.
+
 Nice CSS Trick: To center text within buttons, alert messages and single-text blocks, set `line-height` and `height` to be the same value.
 
 Ex.
