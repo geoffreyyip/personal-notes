@@ -1,3 +1,9 @@
+## Absolute
+
+Absolute elements are positioned with respect to the nearest _positioned_ ancestor. This does not have to be the parent. In fact, it will usually not mean the parent, unless the parent is explictly positioned with `relative`, `absolute` or `fixed`. 
+
+So if you want a child element to be placed with respect to its parent, then you must set the child as `position: absolute` and the parent as `position: relative`.
+
 ## Form
 
 `<form>` elements are containers. They have an `action` or URL to send info to, and a `method` to designate the HTTP method. 
