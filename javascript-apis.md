@@ -1,6 +1,6 @@
 ## `XMLHttpRequest` 
 
-*(Note: The name is historical. ``XMLHttpRequest` ` can be used to retrieve `JSON` instead of `XML`, and it can be used over protocols besides http.)*
+*Note: The name is historical. ``XMLHttpRequest` ` can be used to retrieve `JSON` instead of `XML`, and it can be used over protocols besides http.*
 
 *Unless otherwise stated, "fetch" refers to a generic high-level process, not the Fetch API. A request goes in, and a response comes out. The abstraction is simple, but the low-level details are not. The request can be of any method. The response can be of any data type, though it's usually text in `JSON` format.*
 
@@ -22,20 +22,22 @@ Successful GET requests should have info in the `req.responseText`. It will usua
 
 An example of all of the above:
 
-    function requestHandler() {
-      if (this.status === 200 && this.responseText != null) {
-        // success!
-        var data = `JSON`.parse(this.responseText);
-          }
-      else {
-        // we reached the server, but there is no response
+```javascript
+function requestHandler() {
+  if (this.status === 200 && this.responseText != null) {
+    // success!
+    var data = `JSON`.parse(this.responseText);
       }
-    }
-    
-    var client = new XMLHtmlRequest();
-    client.onload = requestHandler;
-    client.open('GET', 'foobar.html');
-    client.send();
+  else {
+    // we reached the server, but there is no response
+  }
+}
+
+var client = new XMLHtmlRequest();
+client.onload = requestHandler;
+client.open('GET', 'foobar.html');
+client.send();
+```
 
 ### Lifecycle of a XMLHttpRequest
 
@@ -107,6 +109,8 @@ var meta = [
 new Headers(meta)
 ```
 
+`Headers` will also have a **guard** property that sets various limitations on what mutation operations are allowed on the `Headers` object. `none` is the default for a constructed object. 
+
 ### `Request` Interface
 
 `Request` objects have an associated **request**, `Headers` and a **body**. **request** and **body** are defined below in the [Fetch Standard](#fetch-standard).
@@ -142,7 +146,15 @@ if (res.status >= 200 && res.status < 300) {
 }
 ```
 
+An even neater trick is that `Response` has built-in transform methods to return `.json(),` `.text()`, `.blob()`, etc.
 
+```javascript
+// the new way
+const data = res.json();
+
+// the old way
+const data = JSON.parse(res.responseText);
+```
 
 ### `Fetch()`, the part you actually care about
 
@@ -157,7 +169,31 @@ Note, this is the exact same interface as `Request`. That's because `fetch()` ac
 
 You can pass a pre-defined `Request` to `fetch()`. It creates an almost identical copy, but with some properties changed for security.
 
+```Javascript
+// How to GET data
+const user = 'trevordmiller';
+const url = `https://api.github.com/users/${user}`;
 
+fetch(url)
+  .then(response => response.json())
+  .then(json => dataHandler)
+  .catch(error => console.log(error));
+
+// How to POST data
+const url = 'https://randomuser.me/api';
+
+let data = {
+  name: 'Sara'
+};
+
+let fetchData = {
+  method: 'POST',
+  body: data,
+};
+
+fetch(url, fetchData)
+  .then(res => responseHandler);
+```
 
 ## Fetch Standard
 
@@ -207,3 +243,4 @@ Typically, a response will queue **process response**, **process response end-of
 ### CORS Protocol
 
 This allows for sharing response across different origins, and adds functionality on top of the existing HTTP protocol. Both client and server must supply `Access-Control-*` parameters to make `CORS` work.
+
