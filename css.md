@@ -1,3 +1,93 @@
+### Resets
+
+`body` comes with its own user-agent margin. Reset this with `body { margin: 0 }` .
+
+`ul` comes with its own margin, padding, and list-style. Reset this with `ul { margin: 0; padding: 0; list-style: none }` Note you have to do this on the `ul` element, and not the `li` element. `li` elements don't come with their own margins, paddings or list-styles.
+
+### Hyperlinks `<a>`
+
+For all the counterintuitive behavior below, remember that anchor tags were orginally designed to add [hyperlinks](https://duckduckgo.com/?q=I%27m+a+hyperlink) to inline text. They were not designed to be buttons.
+
+`<a>` will **not** automatically inherit color when a hyperlink property is specified. They will take on a default purple color, unless otherwise specified. To overrule the default user-agent styling, you can say `a { color: inherit }` or `a { color: white }`.
+
+`<a>` will **not** automatically take on `height`, or `width` properties. Anchor tags are `inline` by default, which means that both are set to `auto`. To check this behavior, set `display: block` or `display: inline-block`. This default `inline` behavior also means that surrounding padding and margins may perform weirdly.
+
+**Repeat**: Anchors default to `inline`.
+
+
+
+## Flexbox
+
+Fundamentally, flexbox is a `display` mode that helps redistribute excess space across different device sizes. 
+
+Width of items will default to `auto`. In other words, `auto` sizing will grow or shrink the tag until it fits the size of its content.
+
+### Gotchas
+
+**`vertical-align` has no effect on flexbox.** Assuming `flex-direction: row`, you should use `align-items` or `align-self`.
+
+**`margin` is non-collapsing in flexbox.** This is a feature. It makes behavior more predictable.
+
+**`min-width` and `min-height` default to auto, not 0.**
+
+### `margin-left: auto` / `margin-right: auto` Trick
+
+`auto` tells the margin to expand so that content + margin fills its parents. 
+
+In the case of flexbox, it lets you stretch an element to its left or right side.
+
+### `flex`, `flex-basis`, `flex-grow`, and `flex-shrink`
+
+These properties operate on single *flex lines*. 
+
+Three useful defaults for `flex`:
+
+*  `flex-grow` defaults to 0, and `flex-shrink` defaults to 1. `flex-basis` defaults to `auto` so it will depend on content. This means that content will shrink to accommodate the screen space, but it won't grow to accommodate the screen space. To get this behavior, do nothing. This is a nice default behavior for mobile devices.
+*  `flex: none`. Both `flex-grow` and `flex-shrink` are set to 0. Element will not expand or shrink. `flex-basis` defaults to `auto` so it will depend on content.
+*  `flex: auto`. Items will grow or shrink along the main axis to fit its parent container. `flex-basis` defaults to `auto` so it will depend on content.
+
+
+
+Note that `flex-grow` and `flex-shrink` will take effect after items are spread out across multiple lines. A rough reflow process could go like:
+
+1. Put elements across main axis. Use `flex-basis` to start.
+2. If elements don't fit into a single line, then...
+   1. If `flex-wrap: wrap`, distribute them across multiple *flex lines*.
+   2. If `flex-wrap: nowrap`, then leave the elements on a single line.
+3. Within each line...
+   1. If elements overflow the available space, use `flex-shrink` to subtract space.
+   2. If elements underflow the available space, use `flex-grow` to expand elements.
+
+Note this reflow process assumes `justify-content`, `align-content` and `align-items` to all be `stretch`.
+
+`flex-basis` should act the same as `width`, as long as `flex-direction: row`. You don't need to specify `flex-direction: row`, as row is the default value. If `flex-direction: column`, then `flex-basis` should act the same as `height`.
+
+However, `flex-basis` is not the same as `width` or `height`. It only works for children of `display: flex` containers. It will be ignored otherwise.
+
+#### Other Flex Shorthands
+
+`flex` one-value syntax. If it's a unitless number like `flex: 2`, then that means `flex-grow: 2; flex-shrink: 1; flex-basis: 0`. If it's a pixel, percentage, or unit of some sort like `flex: 30px`, then that means `flex-basis: 30px`. This syntax is recommended only if you want to equally distribute space among multiple elements. (E.g. `.nav .items { flex: 1 }`). Otherwise, you will reset the syntax for `flex-shrink` and `flex-basis`. The `flex-basis: 0` can definitely throw you off, especially if you're using auto margins.
+
+Best practice is to use the full three-value syntax, especially for media query overrides or lower-level components. It becomes harder to track the cascade the more layers you pack on.
+
+### `justify-content` vs. `align-content` vs. `align-items` 
+
+These are all flexbox properties. They are meant for the flexbox container.
+
+All three are designed to distribute leftover space. If the item dimensions perfectly fit into their respective containers, then they will have no effect. 
+
+All three default to `stretch`, which means that items will expand to fill the available space around them.
+
+ `justify-content` redistributes whitespace along the *main axis* and `align-items` redistributes whitespace along the *cross axis*. By default, the *main axis* is `row` from left to right, and the *cross axis* is perpendicular to that, from top to bottom. 
+
+**Note**: The perpendicular complement to `justify-content` is `align-items`, not `align-content`.
+
+`align-content` redistributes whitespace for *multiline content*. It has no effect when there is only one line of items. So if you have `flexwrap: nowrap`, then `align-content` will have no effect. If you have  `flexwrap` on, but all the children fit on one line, then `align-content` will have no effect.
+
+The naming convention sucks. You'll get used to it with time.
+
+One way to think of it is that `align-items` acts on individual items within a *flex line*, whereas `align-content` works on the content as a whole. Fitting into this, you can think of `align-self` as aligning a single item, which is semantically consistent with `align-items`. 
+
 ## Absolute
 
 Absolute elements are positioned with respect to the nearest _positioned_ ancestor. This does not have to be the parent. In fact, it will usually not mean the parent, unless the parent is explictly positioned with `relative`, `absolute` or `fixed`. 
@@ -86,6 +176,8 @@ One rule that must be followed. Children of `<ul>` and `<ol>` must be `<li>`. On
 
 To change the bullet-point or numbers to something different, set a `list-style-type` value.
 
+Note that if you remove the bullet-point by setting `list-style-type: none`, you're not actually removing the space when the bullet point was. That space is still there. It's like you turned the bullet point invisible. To remove that space, you must specify `margin-left: 0`, or `margin: 0` on the `<ul>`. Be sure you do that on the `<ul>`. Putting that on the `<li>` has no effect.
+
 To add your own custom list marker, set `list-style-type: none`, specify a background image per `<li>` tag, and add a left margin.
 
 By default, the list marker is given its own vertical section, aka no text may be present below the list marker. This is known as a `list-style-position: outside` and it's the default value. If you want text to be present below the list marker, when text wraps to a second one, then set `list-style-position: inside`.
@@ -98,9 +190,15 @@ list-style: circle inside;
 
 Final note: most CSS Reset and Normalize scripts will remove this information.
 
+### Margin-Left
+
+All `<li>` come with their own `margin-left`. You may want to reset margin to 0.
+
 ### On Horizontal Lists and Their Quirks
 
-Sometimes you may want a horizontal list. For example, if you have a fixed navigation bar with multiple buttons, you may wrap those buttons inside of `<li>` tags. You have three options to make a list horizontal: change `display` to `inline` or `inline-block` and using `float`.
+Sometimes you may want a horizontal list. For example, if you have a fixed navigation bar with multiple buttons, you may wrap those buttons inside of `<li>`
+
+ tags. You have three options to make a list horizontal: change `display` to `inline` or `inline-block` and using `float`.
 
 If changing `display`, `inline-block` is preferred over `inline` as it gives greater control. You can modify margins and set fixed dimensions for `inline-block`. You can't with `inline`. Note that changing display sets `list-style-type: none`. 
 
