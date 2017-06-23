@@ -104,6 +104,8 @@ So if you want a child element to be placed with respect to its parent, then you
 
 `<textarea` is useful for inputs spanning multiple lines. It does not have a type attribute, as it only accepts text data. You can use CSS to specify `width` and `height`.
 
+`<input>` tags are inline by default.
+
 ### Radio, Checkbox, and Dropdowns
 
 `type="radio"` and `type="<checkbox>"` are similar in implementation. You don't need to wrap your options in anything. But you do need each `<input>` tag to have to same `name` attribute for them to be linked. `value`s should be set as attributes. You may optionally include text next to a `type="radio"` or `type="checkbox"` tag, but that information will not get sent to the servers. An example follows below:
@@ -113,6 +115,8 @@ So if you want a child element to be placed with respect to its parent, then you
 <input type="radio" name="day" value="Saturday"> Saturday
 <input type="radio" name="day" value="Sunday"> Sunday
 ```
+
+You may optionally associate a `<label>` with a `radio` or `checkbox` element. There are two ways. The first is `<label for="foobar"></label>` and `<input type="checkbox" id="foobar">`. The second is `<label><input type="checkbox"><span>some element and text</span></label>`. In the first way, the `<label>` and `<input>` can be located separately. In the second way, the `input` must be a child of the `label` and there can only be one other sibling.
 
 Dropdown options are different. First, there is no dropdown tag. Second, you do need to wrap your options inside a parent `<select>` tag and put choices as `<option>` tags. `name` is specified in the parent tag. `value` will be specified in the child tags. An example follows below:
 
@@ -337,7 +341,7 @@ Box-sizing defaults to content-box, an additive model. You have your content wid
 
 ### Box, Inline, Inline-Box
 
-`Inline` elements can't have fixed widths or heights. Unless you use `inline-box`. Then the elements can be set on the same line as other elements and have width/ height set.
+`Inline` elements can't have fixed widths or heights. Unless you use `inline-block`. Then the elements can be set on the same line as other elements and have width/ height set.
 
 ### Margin and Padding Colors
 
